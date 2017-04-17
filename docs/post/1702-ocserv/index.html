@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> 记OpenConnect VPN server的搭建 · blanK</title>
+    <base href="/">
+    <meta charset="utf-8"> 
+    
+    <meta name="keywords" content="ocserv, vpn, ">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="/css/default.min.css">
+    <script>
+    hljs.initHighlightingOnLoad();
+    </script>
+</head> <body>
+    <div id="mobile-navbar" class="mobile-navbar">
+        <div class="mobile-header-logo">
+            <a href="/." class="logo">blanK</a>
+        </div>
+        <div class="mobile-navbar-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <nav id="mobile-menu" class="mobile-menu slideout-menu">
+        <ul class="mobile-menu-list">
+        <a href="/">
+                <li class="mobile-menu-item">Home</li>
+            </a>
+            <a href="/post/">
+                <li class="mobile-menu-item">Archive</li>
+            </a>
+           
+            <a href="https://github.com/mjyi">
+                <li class="mobile-menu-item">Github</li>
+            </a>
+        </ul>
+    </nav>
+    <div class="container" id="mobile-panel">
+        <header id="header" class="header">
+            <div class="logo-wrapper">
+                <a href="/." class="logo">blanK</a>
+            </div>
+            <nav class="site-navbar">
+                <ul id="menu" class="menu">
+                    <li class="menu-item">
+                        <a class="menu-item-link" href="/">Home</a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-item-link" href="/post/">Archive</a>
+                    </li>
+                    
+                    <li class="menu-item">
+                        <a class="menu-item-link" href="https://github.com/mjyi">Github</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+
+<main id="main" class="main">
+    <div class="content-wrapper">
+        <article class="post">
+            <header class="post-header">
+    <h1 class="post-title">
+          <a class="post-link" href="/post/1702-ocserv/"> 记OpenConnect VPN server的搭建  </a>
+      	</h1>
+    <div class="post-meta">
+        <span class="post-time"> 2017年02月15日 · 1000 Words</span>
+    </div>
+</header>
+ 
+            <div class="post-content">
+                <p>目前我认为最好用的<code>VPN</code>是<code>shadowsocks</code>。配合<code>Chrome</code>的<code>SwitchyOmega</code>可实现是否通过代理服务器访问。</p>
+
+<p>很遗憾在苹果设备上，很好支持<code>shadowsocks</code>的<code>App</code>的价钱很高。因此只能使用系统支持的<code>IPSec</code>，<code>L2TP</code>之类的<code>VPN</code>
+,用起来感觉有2个缺点：连接慢，爱断线。(<em>应该是我的优化没做好吧。</em>)
+
+- OpenConnet Server（ocserv）它通过实现Cisco的AnyConnect协议，用DTLS作为主要的加密传输协议。
+- AnyConnect的VPN协议默认使用UDP DTLS作为数据传输，但如果有什么网络问题导致UDP传输出现问题，它会利用最初建立的TCP TLS通道作为备份通道，降低VPN断开的概率。</p>
+
+<p><em>（ubuntu 和 CentOS 两部分）</em></p>
+
+<h1 id="一-ununtu-14-04-lts-安装ocserv">一、Ununtu 14.04 LTS 安装ocserv</h1>
+
+<p>vps:</p>
+
+<ul>
+<li>Ubuntu 14.04 LTS</li>
+<li>OpenVZ架构</li>
+</ul>
+
+<h2 id="编译ocserv">编译ocserv</h2>
+
+<p>首先，我们先下载<code>ocserv</code>的最新版本.</p>
+
+<pre><code class="language-bash">wget ftp://ftp.infradead.org/pub/ocserv/ocserv-0.11.7.tar.xz
+tar xvf ocserv-0.11.7.tar.xz
+cd ocserv-0.11.7
+
+# 添加编译依赖库。
+apt-get install libev-dev  build-essential pkg-config libgnutls28-dev libreadline-dev libseccomp-dev libwrap0-dev libnl-nf-3-dev liblz4-dev
+
+# 编译/安装
+```bash
+./configure
+
+make  
+make install
+</code></pre>
+
+<h2 id="配置ocserv">配置ocserv</h2>
+
+<p>参考<a href="http://www.infradead.org/ocserv/manual.html">官方文档</a></p>
+
+<h3 id="证书">证书</h3>
+
+<p>安装证书工具 <code>apt-get install gnutls-bin</code></p>
+
+<p>证书的配置参考<a href="http://www.infradead.org/ocserv/manual.html">官方文档</a>即可</p>
+
+<p>** 创建CA证书模板 **</p>
+
+<pre><code>mkdir certificates
+cd certificates
+
+vi ca.tmpl
+cn = &quot;Your CA name&quot; 
+organization = &quot;Your fancy name&quot; 
+serial = 1 
+expiration_days = 3650
+ca 
+signing_key 
+cert_signing_key 
+crl_signing_key
+</code></pre>
+
+<p>** 生成CA密钥 和 证书 **</p>
+
+<pre><code>certtool --generate-privkey --outfile ca-key.pem
+certtool --generate-self-signed --load-privkey ca-key.pem --template ca.tmpl --outfile ca-cert.pem
+</code></pre>
+
+<p><strong>同样，生成服务器证书</strong></p>
+
+<pre><code>vi server.tmpl
+cn = &quot;Your hostname or IP&quot; 
+organization = &quot;Your fancy name&quot; 
+expiration_days = 3650
+signing_key 
+encryption_key
+tls_www_server
+</code></pre>
+
+<p><strong>生成Server密钥 和 证书</strong></p>
+
+<pre><code>certtool --generate-privkey --outfile server-key.pem
+
+certtool --generate-certificate --load-privkey server-key.pem --load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem --template server.tmpl --outfile server-cert.pem
+
+</code></pre>
+
+<p>将CA，Server证书与密钥复制到以下文件夹</p>
+
+<pre><code>cp ca-cert.pem /etc/ssl/private/my-ca-cert.pem
+cp server-cert.pem /etc/ssl/private/my-server-cert.pem
+cp server-key.pem /etc/ssl/private/my-server-key.pem
+</code></pre>
+
+<h3 id="下面准备配置文件">下面准备配置文件</h3>
+
+<pre><code>mkdir /etc/ocserv
+cd ~/ocserv*
+cp doc/sample.config /etc/ocserv/ocserv.conf
+vi /etc/ocserv/ocserv.conf
+</code></pre>
+
+<p>配置文件可以<a href="http://www.infradead.org/ocserv/manual.html">官方文档</a>来写，不过这里我们重点要确保以下条目正确。</p>
+
+<pre><code># 登陆方式，目前先用密码登录
+auth = &quot;plain[/etc/ocserv/ocpasswd]&quot;
+
+# 允许同时连接的客户端数量
+max-clients = 4
+
+# 限制同一客户端的并行登陆数量
+max-same-clients = 2
+
+# 服务监听的IP（服务器IP，可不设置）
+#listen-host = 1.2.3.4
+
+# 服务监听的TCP/UDP端口（选择你喜欢的数字）
+tcp-port = 9000
+udp-port = 9001
+
+# 自动优化VPN的网络性能
+try-mtu-discovery = true
+
+# 确保服务器正确读取用户证书（后面会用到用户证书）
+cert-user-oid = 2.5.4.3
+
+# 服务器证书与密钥
+ca-cert = /etc/ssl/private/my-ca-cert.pem
+server-cert = /etc/ssl/private/my-server-cert.pem
+server-key = /etc/ssl/private/my-server-key.pem
+
+# 客户端连上vpn后使用的dns
+dns = 8.8.8.8
+dns = 8.8.4.4
+
+# 注释掉所有的route，让服务器成为gateway
+#route = 192.168.1.0/255.255.255.0
+
+# 启用cisco客户端兼容性支持
+cisco-client-compat = true
+
+#据说可以优化速度
+output-buffer = 23000 
+try-mtu-discovery = true 
+</code></pre>
+
+<h3 id="修改防火墙">修改防火墙</h3>
+
+<p>修改内核设置，使得支持转发，<code>vi /etc/sysctl.conf</code>,将<code>net.ipv4.ip_forward=0</code>改为<code>net.ipv4.ip_forward=1</code>
+保存生效<code>sysctl -p</code>。</p>
+
+<p>打开OCserv对应的TCP/UDP端口</p>
+
+<pre><code>iptables -A INPUT -p tcp -m state --state NEW --dport 9000 -j ACCEPT
+iptables -A INPUT -p udp -m state --state NEW --dport 9001 -j ACCEPT
+</code></pre>
+
+<p>开启NAT转发。</p>
+
+<pre><code>iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o venet0 -j MASQUERADE
+iptables -A FORWARD -s 192.168.1.0/24 -j ACCEPT
+</code></pre>
+
+<p>使用<code>iptables -t nat -L</code>来验证转发是否开启成功</p>
+
+<h3 id="测试服务器">测试服务器</h3>
+
+<p>创建一个帐号</p>
+
+<pre><code>ocpasswd -c /etc/ocserv/ocpasswd username
+</code></pre>
+
+<p>启动服务</p>
+
+<pre><code>ocserv -f -d 1
+</code></pre>
+
+<p>连接手机测试。。。。</p>
+
+<h3 id="免密码登录">免密码登录</h3>
+
+<p>创建客户端证书，免密码登录。</p>
+
+<pre><code>cd ~/certificates/
+vi user.tmpl
+
+cn = &quot;some random name&quot;
+unit = &quot;some random unit&quot;
+expiration_days = 365
+signing_key
+tls_www_client
+</code></pre>
+
+<p>**生成User密钥 生成User证书 **</p>
+
+<pre><code>certtool --generate-privkey --outfile user-key.pem
+
+certtool --generate-certificate --load-privkey user-key.pem --load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem --template user.tmpl --outfile user-cert.pem
+</code></pre>
+
+<p>将证书和密钥转为PKCS12的格式</p>
+
+<pre><code>certtool --to-p12 --load-privkey user-key.pem --pkcs-cipher 3des-pkcs12 --load-certificate user-cert.pem --outfile user.p12 --outder
+</code></pre>
+
+<p>输入证书名字和密码。</p>
+
+<p>可以使用web服务将<code>user.p12</code>导入手机。</p>
+
+<p>我用的是python的一个简单http服务器命令</p>
+
+<pre><code>cd ~/targetfolder
+python -m SimpleHTTPServer
+</code></pre>
+
+<p>用<code>Safari</code>打开下载。</p>
+
+<p>** 修改认证方式 **</p>
+
+<pre><code>vi /etc/ocserv/ocserv.conf
+
+# 改为证书登陆，注释掉原来的登陆模式
+auth = &quot;certificate&quot;
+
+# 证书认证不支持这个选项，注释掉这行
+#listen-clear-file = /var/run/ocserv-conn.socket
+
+# 启用证书验证
+ca-cert = /etc/ssl/private/my-ca-cert.pem
+</code></pre>
+
+<p>同时，我们可以制作一个启动脚本。</p>
+
+<pre><code>cd /etc/init.d
+ln -s /lib/init/upstart-job ocserv
+
+cd /etc/init
+vi  ocserv.conf
+</code></pre>
+
+<p>填入：</p>
+
+<pre><code>#!upstart
+description &quot;OpenConnect Server&quot;
+
+start on runlevel [2345]
+stop on runlevel [06]
+
+respawn
+respawn limit 20 5
+
+script
+    exec start-stop-daemon --start --pidfile /var/run/ocserv.pid --exec /usr/local/sbin/ocserv -- -f &gt;&gt; /dev/null 2&gt;&amp;1
+end script
+</code></pre>
+
+<p>这样，我们就可以使用<code>service ocserv start</code>和<code>service ocserv stop</code>来控制服务了。</p>
+
+<p><strong>2017-03-23 增</strong></p>
+
+<h1 id="二-在centos-7-安装ocserv">二、在CentOS 7 安装ocserv</h1>
+
+<p><strong>安装时要注意权限问题</strong></p>
+
+<h2 id="安装">安装</h2>
+
+<p><a href="http://fedoraproject.org/wiki/EPEL">EPEL</a>仓库白提供<code>ocserv</code>，所以可以通过<code>yum</code>安装</p>
+
+<pre><code class="language-bash">yum install epel-release
+yum
+</code></pre>
+
+<h2 id="生成证书-同ubuntu">生成证书（同ubuntu）</h2>
+
+<h2 id="配置文件">配置文件</h2>
+
+<pre><code>#auth = &quot;pam&quot;
+#auth = &quot;pam[gid-min=1000]&quot;
+#auth = &quot;plain[/etc/ocserv/ocpasswd]&quot;
+auth = &quot;certificate&quot;
+#auth = &quot;radius[config=/etc/radiusclient/radiusclient.conf,groupconfig=true]&quot;
+
+# Specify alternative authentication methods that are sufficient
+# for authentication. That is, if set, any of the methods enabled
+# will be sufficient to login.
+#enable-auth = &quot;certificate&quot;
+#enable-auth = &quot;gssapi&quot;
+#enable-auth = &quot;gssapi[keytab=/etc/key.tab,require-local-user-map=true,tgt-freshness-time=900]&quot;
+
+# hostname.
+#listen-host = [IP|HOSTNAME]
+
+# TCP and UDP port number
+tcp-port = 4443
+udp-port = 4443
+
+# The user the worker processes will be run as. It should be
+# unique (no other services run as this user).
+run-as-user = ocserv
+run-as-group = ocserv
+
+# socket file used for server IPC (worker-main), will be appended with .PID
+# It must be accessible within the chroot environment (if any), so it is best
+# specified relatively to the chroot directory.
+socket-file = ocserv.sock
+
+# The default server directory. Does not require any devices present.
+chroot-dir = /var/lib/ocserv
+
+# Limit the number of clients. Unset or set to zero for unlimited.
+#max-clients = 1024
+max-clients = 16
+
+# Limit the number of identical clients (i.e., users connecting 
+# multiple times). Unset or set to zero for unlimited.
+max-same-clients = 4
+
+# Limit the number of client connections to one every X milliseconds 
+# (X is the provided value). Set to zero for no limit.
+#rate-limit-ms = 100
+
+# Keepalive in seconds
+keepalive = 32400
+
+dpd = 90
+
+mobile-dpd = 1800
+
+switch-to-tcp-timeout = 25
+
+# MTU discovery (DPD must be enabled)
+try-mtu-discovery = true
+
+
+# The Certificate 
+#ca-cert = /etc/pki/ocserv/cacerts/ca.crt
+ca-cert = /etc/ssl/private/my-ca-cert.pem
+server-cert = /etc/ssl/private/my-server-cert.pem
+server-key = /etc/ssl/private/my-server-key.pem
+
+#  CN = 2.5.4.3, UID = 0.9.2342.19200300.100.1.1
+cert-user-oid = 2.5.4.3
+
+#tls-priorities = &quot;NORMAL:%SERVER_PRECEDENCE:%COMPAT:-VERS-SSL3.0&quot;
+tls-priorities = &quot;NORMAL:%SERVER_PRECEDENCE:%COMPAT:-VERS-SSL3.0&quot;
+
+auth-timeout = 240
+
+min-reauth-time = 300
+
+max-ban-score = 50
+
+ban-reset-time = 300
+cookie-timeout = 300
+deny-roaming = false
+rekey-time = 172800
+rekey-method = ssl
+use-occtl = true
+
+# PID file. It can be overriden in the command line.
+pid-file = /var/run/ocserv.pid
+
+# The name to use for the tun device
+device = vpns
+
+# Whether the generated IPs will be predictable, i.e., IP stays the
+# same for the same user when possible.
+predictable-ips = true
+
+# The default domain to be advertised
+default-domain = example.com
+
+ipv4-network = 192.168.1.0
+ipv4-netmask = 255.255.255.0
+
+# An alternative way of specifying the network:
+#ipv4-network = 192.168.1.0/24
+
+# The IPv6 subnet that leases will be given from.
+ipv6-network = fda9:4efe:7e3b:03ea::/64
+
+dns = 8.8.8.8
+dns = 8.8.4.4
+
+ping-leases = false
+
+output-buffer = 23000
+
+#route = 10.10.10.0/255.255.255.0
+#route = 192.168.0.0/255.255.0.0
+#route = fef4:db8:1000:1001::/64
+
+cisco-client-compat = true
+
+dtls-legacy = true
+</code></pre>
+
+<p>配置有删减。删去的是默认配置和注释。</p>
+
+<h2 id="配置系统设置和防火墙转发">配置系统设置和防火墙转发</h2>
+
+<ul>
+<li>为<code>/etc/sysctl.conf</code> 添加<code>net.ipv4.ip_forward=1</code>. 保存并使其生效<code>sysctl -p</code>.</li>
+<li>配置<code>iptables</code>。</li>
+</ul>
+
+<pre><code>iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o venet0 -j MASQUERADE
+iptables -A FORWARD -s 192.168.1.0/24 -j ACCEPT
+</code></pre>
+
+<p>因为有了<code>ubuntu</code>上安装的经验，在<code>CentOS</code>虽然也遇到了些问题，但都是配置文件没有配置好导致的。</p>
+
+<p>凭借回忆操作写下这些步骤，怕只能下次安装的时候来验证了！</p>
+
+<p>、、over..（又瞎折腾一次。。。。）</p>
+
+<p><strong>后记：</strong></p>
+
+<p>终于能够舒服的看片了！</p>
+
+<p>iphone 客户端：在<code>APP Store</code> 搜索<code>AnyConnect</code>。</br>
+<em>参考：</em></br>
+<a href="http://www.infradead.org/ocserv/manual.html">官方文档</a></br>
+<a href="https://bitinn.net/11084/">https://bitinn.net/11084/</a></br>
+<a href="https://github.com/iMeiji/shadowsocks_install/wiki/OpenConnect-VPN-server">OpenConnect VPN server</a></p>
+            </div>
+            
+            <footer class="post-footer">
+                
+<div class="post-tags">
+    
+    <a href="/tags/ocserv">ocserv</a> 
+    <a href="/tags/vpn">vpn</a> 
+</div>
+
+ <nav class="post-nav">
+    
+    <a class="prev" href="/post/1704-dev-in-mac/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Mac开发的一些基本配置</span>
+        <span class="prev-text nav-mobile">Prev</span>
+    </a>
+     
+    
+    <a class="next" href="/post/1609-start/">
+        <span class="next-text nav-default">富士山下</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+    </a>
+    
+</nav>
+
+            </footer>
+        </article>
+    </div>
+    <div class="comments" id="comments">
+    <div>
+        <h2> Comments </h2></div>
+    
+</div>
+
+    </div>
+</main>
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; 2015 - 2017 <i class="iconfont icon-heart"></i> 
+        blanK · Powered by <a class="hexo-link" href="https://gohugo.io/">Hugo</a>
+    </div>
+</footer>
+<div class="back-to-top" id="back-to-top">
+    <i class="iconfont icon-up"></i>
+</div>
+</div>
+<script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="/js/slideout.js"></script>
+<script type="text/javascript" src="/js/even.js"></script>
+<script type="text/javascript" src="/js/bootstrap.js"></script>
+
+</body>
+
+</html>
