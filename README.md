@@ -2,7 +2,7 @@
 
 **[Demo](https://mjyi.github.io/Hugo-theme-Orange/)**
 
-**Screenshots**
+**Screenshot**
 
 ![img-1](screenshots/screenshot.png)
 
