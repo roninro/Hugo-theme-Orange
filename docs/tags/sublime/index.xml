@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sublime on My New Hugo Site</title>
+    <link>http://example.org/tags/sublime/index.xml</link>
+    <description>Recent content in Sublime on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://example.org/tags/sublime/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Mac开发的一些基本配置</title>
+      <link>http://example.org/post/1704-dev-in-mac/</link>
+      <pubDate>Wed, 05 Apr 2017 14:17:51 +0800</pubDate>
+      
+      <guid>http://example.org/post/1704-dev-in-mac/</guid>
+      <description>
+
+&lt;blockquote&gt;
+&lt;p&gt;工欲善其事，必先利其器。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;记一些作为iOS开发必装的工具包。&lt;/p&gt;
+
+&lt;h1 id=&#34;homebrew&#34;&gt;Homebrew&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;macOS 的包管理工具，许多开发用到的工具都由它安装&lt;/strong&gt;&lt;/br&gt;
+详见：&lt;a href=&#34;https://brew.sh/&#34;&gt;Homebrew&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install &lt;a href=&#34;https://brew.sh/&#34;&gt;Homebrew&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;/usr/bin/ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;cocoapods&#34;&gt;Cocoapods&lt;/h1&gt;
+
+&lt;h2 id=&#34;install-cocoapods&#34;&gt;Install Cocoapods&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;# 换源
+gem sources --remove https://rubygems.org/
+gem sources --add https://gems.ruby-china.org/
+# 更新gem
+sudo gem update --system
+sudo gem install cocoapods
+# 遇到问题（?usr/bin?）
+# sudo gem install -n /usr/local/bin cocoapods
+pod setup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;using&#34;&gt;Using&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;#Init
+pod init
+
+# open source
+source &#39;https://github.com/CocoaPods/Specs.git&#39;
+
+# my work
+source &#39;https://github.com/Artsy/Specs.git&#39;
+
+target &#39;App&#39; do
+
+  pod &#39;Artsy+UIColors&#39;
+  pod &#39;Artsy+UIButtons&#39;
+
+  pod &#39;FLKAutoLayout&#39;
+  pod &#39;ISO8601DateFormatter&#39;, &#39;0.7&#39;
+  pod &#39;AFNetworking&#39;, &#39;~&amp;gt; 2.0&#39;
+
+  target &#39;AppTests&#39; do
+    inherit! :search_paths
+    pod &#39;FBSnapshotTestCase&#39;
+    pod &#39;Quick&#39;
+    pod &#39;Nimble&#39;
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;sublime-text-3&#34;&gt;Sublime Text 3&lt;/h1&gt;
+
+&lt;p&gt;下载安装&lt;a href=&#34;https://www.sublimetext.com/3&#34;&gt;Sublime Text 3&lt;/a&gt;.&lt;/br&gt;
+关于&lt;code&gt;Sublime Text 3&lt;/code&gt;的&lt;a href=&#34;http://feliving.github.io/Sublime-Text-3-Documentation/&#34;&gt;相关文档&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;关于上述文档中关于 OS X Command Line 的描述有些许不完善的地方。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;//具体路径参照用户所安装的目录。
+ln -s &amp;quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&amp;quot; ~/bin/subl
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;执行上面的命令往往会报一些权限的问题。
+因为在EI Capitan 以及更高的系统版本中，用户是没有对&lt;code&gt;usr/bin&lt;/code&gt;的写的权限的。
+但是我们可以写入&lt;code&gt;usr/local/bin&lt;/code&gt;中，因为一般情况下，它也是用户的默认路径。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo rm /usr/local/bin/subl
+sudo ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;插件&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://packagecontrol.io&#34;&gt;Package Control&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;ctrl + ` OR View&amp;gt;Show Console
+###################Copy - Paste######################
+    
+import urllib.request,os,hashlib; h = &#39;df21e130d211cfc94d9b0905775a7c0f&#39; + &#39;1e3d39e33b79698005270310898eea76&#39;; pf = &#39;Package Control.sublime-package&#39;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &#39;http://packagecontrol.io/&#39; + pf.replace(&#39; &#39;, &#39;%20&#39;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&#39;Error validating download (got %s instead of %s), please try manual install&#39; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &#39;wb&#39; ).write(by)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;OmniMarkupPreviewer&lt;/li&gt;
+&lt;li&gt;HTML-CSS-JS Prettify&lt;/li&gt;
+&lt;li&gt;SublimeCodeIntel&lt;/li&gt;
+&lt;li&gt;Material Theme&lt;/li&gt;
+&lt;li&gt;Emmet&lt;/li&gt;
+&lt;li&gt;GoSublime&lt;/li&gt;
+&lt;li&gt;SideBarEnhancements&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;配置&lt;/br&gt;
+主要是对 &lt;code&gt;Material&lt;/code&gt; 主题的配置&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+	&amp;quot;always_show_minimap_viewport&amp;quot;: true,
+	&amp;quot;bold_folder_labels&amp;quot;: true,
+	&amp;quot;color_scheme&amp;quot;: &amp;quot;Packages/Material Theme/schemes/Material-Theme.tmTheme&amp;quot;,
+	&amp;quot;font_options&amp;quot;:
+	[
+		&amp;quot;gray_antialias&amp;quot;,
+		&amp;quot;subpixel_antialias&amp;quot;
+	],
+	&amp;quot;ignored_packages&amp;quot;:
+	[
+	],
+	&amp;quot;indent_guide_options&amp;quot;:
+	[
+		&amp;quot;draw_normal&amp;quot;,
+		&amp;quot;draw_active&amp;quot;
+	],
+	&amp;quot;line_padding_bottom&amp;quot;: 2,
+	&amp;quot;line_padding_top&amp;quot;: 2,
+	&amp;quot;material_theme_contrast_mode&amp;quot;: true,
+	&amp;quot;material_theme_small_tab&amp;quot;: true,
+	&amp;quot;material_theme_tabs_separator&amp;quot;: true,
+	&amp;quot;overlay_scroll_bars&amp;quot;: &amp;quot;enabled&amp;quot;,
+	&amp;quot;theme&amp;quot;: &amp;quot;Material-Theme.sublime-theme&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;主题很美观。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;media/sublime_snapshot.png&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+
+&lt;h1 id=&#34;为git设置代理&#34;&gt;为git设置代理&lt;/h1&gt;
+
+&lt;p&gt;首先要安装&lt;code&gt;shadowsocks&lt;/code&gt;,然后为&lt;code&gt;git&lt;/code&gt;配置全局代理：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git config --global http.proxy &#39;socks5://127.0.0.1:1080&#39;
+git config --global https.proxy &#39;socks5://127.0.0.1:1080&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Over!.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
