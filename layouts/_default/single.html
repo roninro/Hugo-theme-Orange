@@ -1,0 +1,19 @@
+{{ partial "header.html" . }} {{ partial "nav.html" . }}
+
+<main id="main" class="main">
+    <div class="content-wrapper">
+        <article class="post">
+            {{ partial "post-header.html" . }} 
+            <div class="post-content">
+                {{ .Content }}
+            </div>
+            <!-- {{ partial "author.html" }} -->
+            <footer class="post-footer">
+                {{ partial "tags.html" . }} {{ partial "pre-next.html" .}}
+            </footer>
+        </article>
+    </div>
+    {{ partial "disqus.html" . }}
+    </div>
+</main>
+{{ partial "footer.html" . }}

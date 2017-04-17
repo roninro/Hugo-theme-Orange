@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{{ .Site.Title }}</title>
+    <base href="{{ .Site.BaseURL }}">
+    <meta charset="utf-8"> {{with .Description }}
+    <meta name="description" content="{{ . }}">{{end}}
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- highlight.js -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="/css/default.min.css">
+    <script>
+    hljs.initHighlightingOnLoad();
+    </script>
+</head>
+{{ partial "nav.html" }}
+<main id="main" class="main">
+    <div class="content-wrapper">
+        <div id="content" class="content">
+            <section id="posts" class="posts">
+                {{ range .Data.Pages }} {{ if .Section}} {{ .Render "summary"}} {{ end }} {{ end }}
+            </section>
+        </div>
+    </div>
+</main>
+{{ partial "footer.html" . }}

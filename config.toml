@@ -1,0 +1,17 @@
+baseurl = "https://mjyi.github.io/"
+title = "Blank's Blog"
+languageCode = "en-us"
+disqusShortname = "mjyi-io"
+googleAnalytics = "UA-97310918-1"
+copyright = "Copyright (c) 2015 - 2017, blanK; all rights reserved."
+MetaDataFormat = "yaml"
+theme = "orange"
+[author]
+    name = "blanK"
+
+[indexes]
+    tag = "tags"
+    topic = "topics"
+
+[Params]
+	DateFormat = "2006年01月02日"

@@ -1,0 +1,9 @@
+<article class="post">
+    {{ partial "post-header.html" . }}
+    <div class="post-content">
+        {{ .Summary }}
+        <div class="read-more">
+            <a href="{{ .Permalink }}" class="read-more-link">Read more...</a>
+        </div>
+    </div>
+</article>

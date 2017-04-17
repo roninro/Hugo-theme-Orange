@@ -1,0 +1,18 @@
+ {{ partial "header.html" . }} {{ partial "nav.html" . }}
+<main id="main" class="main">
+    <div class="content-wrapper">
+        <section id="terms" class="terms">
+            <h1 id="title">{{ .Title }}</h1> 
+            {{ $data := .Data }} 
+            {{ range $key,$value := .Data.Terms.ByCount }}
+            <div class="terms-post">
+                <h2 class="terms-post-title">
+          		<a href="{{ $data.Plural }}/{{ $value.Name | urlize }}" class="terms-post-link">{{ $value.Name }}</a>
+          		({{ $value.Count }})
+        		</h2>
+            </div>
+            {{ end }}
+        </section>
+    </div>
+</main>
+{{ partial "footer.html" . }}

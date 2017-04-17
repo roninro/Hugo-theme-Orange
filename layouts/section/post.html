@@ -1,0 +1,15 @@
+{{ partial "header.html" . }} {{ partial "nav.html" . }}
+<main id="main" class="main">
+    <div class="content-wrapper">
+        <section id="archive" class="archive">
+            <h1 id="title">Archive</h1> 
+            {{ range .Data.Pages.GroupByDate "2006" }}
+            <div class="collection-title">
+                <h2 class="archive-year">{{ .Key }}</h2>
+            </div>
+            {{ range .Pages }} {{ .Render "li"}} {{ end }} {{ end }}
+        </section>
+    </div>
+    </div>
+</main>
+{{ partial "footer.html" . }}
