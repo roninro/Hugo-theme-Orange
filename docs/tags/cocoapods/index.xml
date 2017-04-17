@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cocoapods on My Hugo Site</title>
-    <link>/tags/cocoapods/index.xml</link>
+    <link>https://mjyi.github.io/Hugo-theme-Orange/tags/cocoapods/index.xml</link>
     <description>Recent content in Cocoapods on My Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2015 - 2017, blanK; all rights reserved.</copyright>
-    <atom:link href="/tags/cocoapods/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://mjyi.github.io/Hugo-theme-Orange/tags/cocoapods/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Mac开发的一些基本配置</title>
-      <link>/post/1704-dev-in-mac/</link>
+      <link>https://mjyi.github.io/Hugo-theme-Orange/post/1704-dev-in-mac/</link>
       <pubDate>Wed, 05 Apr 2017 14:17:51 +0800</pubDate>
       
-      <guid>/post/1704-dev-in-mac/</guid>
+      <guid>https://mjyi.github.io/Hugo-theme-Orange/post/1704-dev-in-mac/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;工欲善其事，必先利其器。&lt;/p&gt;
 &lt;/blockquote&gt;

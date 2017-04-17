@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on My Hugo Site</title>
-    <link>/post/index.xml</link>
+    <link>https://mjyi.github.io/Hugo-theme-Orange/post/index.xml</link>
     <description>Recent content in Posts on My Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2015 - 2017, blanK; all rights reserved.</copyright>
     <lastBuildDate>Wed, 05 Apr 2017 14:17:51 +0800</lastBuildDate>
-    <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://mjyi.github.io/Hugo-theme-Orange/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Mac开发的一些基本配置</title>
-      <link>/post/1704-dev-in-mac/</link>
+      <link>https://mjyi.github.io/Hugo-theme-Orange/post/1704-dev-in-mac/</link>
       <pubDate>Wed, 05 Apr 2017 14:17:51 +0800</pubDate>
       
-      <guid>/post/1704-dev-in-mac/</guid>
+      <guid>https://mjyi.github.io/Hugo-theme-Orange/post/1704-dev-in-mac/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;工欲善其事，必先利其器。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -177,10 +177,10 @@ git config --global https.proxy &#39;socks5://127.0.0.1:1080&#39;
     
     <item>
       <title>记OpenConnect VPN server的搭建</title>
-      <link>/post/1702-ocserv/</link>
+      <link>https://mjyi.github.io/Hugo-theme-Orange/post/1702-ocserv/</link>
       <pubDate>Wed, 15 Feb 2017 17:15:43 +0000</pubDate>
       
-      <guid>/post/1702-ocserv/</guid>
+      <guid>https://mjyi.github.io/Hugo-theme-Orange/post/1702-ocserv/</guid>
       <description>&lt;p&gt;目前我认为最好用的&lt;code&gt;VPN&lt;/code&gt;是&lt;code&gt;shadowsocks&lt;/code&gt;。配合&lt;code&gt;Chrome&lt;/code&gt;的&lt;code&gt;SwitchyOmega&lt;/code&gt;可实现是否通过代理服务器访问。&lt;/p&gt;
 
 &lt;p&gt;很遗憾在苹果设备上，很好支持&lt;code&gt;shadowsocks&lt;/code&gt;的&lt;code&gt;App&lt;/code&gt;的价钱很高。因此只能使用系统支持的&lt;code&gt;IPSec&lt;/code&gt;，&lt;code&gt;L2TP&lt;/code&gt;之类的&lt;code&gt;VPN&lt;/code&gt;
@@ -612,10 +612,10 @@ iptables -A FORWARD -s 192.168.1.0/24 -j ACCEPT
     
     <item>
       <title>富士山下</title>
-      <link>/post/1609-start/</link>
+      <link>https://mjyi.github.io/Hugo-theme-Orange/post/1609-start/</link>
       <pubDate>Sun, 11 Sep 2016 00:00:00 +0000</pubDate>
       
-      <guid>/post/1609-start/</guid>
+      <guid>https://mjyi.github.io/Hugo-theme-Orange/post/1609-start/</guid>
       <description>&lt;p&gt;&lt;iframe frameborder=&#34;no&#34; border=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; width=330 height=86 src=&#34;//music.163.com/outchain/player?type=2&amp;id=65766&amp;height=66&#34;&gt;&lt;/iframe&gt;
 &lt;/p&gt;</description>
     </item>

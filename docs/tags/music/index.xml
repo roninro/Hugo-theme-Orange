@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Music on My Hugo Site</title>
-    <link>/tags/music/index.xml</link>
+    <link>https://mjyi.github.io/Hugo-theme-Orange/tags/music/index.xml</link>
     <description>Recent content in Music on My Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright (c) 2015 - 2017, blanK; all rights reserved.</copyright>
-    <atom:link href="/tags/music/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://mjyi.github.io/Hugo-theme-Orange/tags/music/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>富士山下</title>
-      <link>/post/1609-start/</link>
+      <link>https://mjyi.github.io/Hugo-theme-Orange/post/1609-start/</link>
       <pubDate>Sun, 11 Sep 2016 00:00:00 +0000</pubDate>
       
-      <guid>/post/1609-start/</guid>
+      <guid>https://mjyi.github.io/Hugo-theme-Orange/post/1609-start/</guid>
       <description>&lt;p&gt;&lt;iframe frameborder=&#34;no&#34; border=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; width=330 height=86 src=&#34;//music.163.com/outchain/player?type=2&amp;id=65766&amp;height=66&#34;&gt;&lt;/iframe&gt;
 &lt;/p&gt;</description>
     </item>

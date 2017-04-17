@@ -2,92 +2,92 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>/post/1704-dev-in-mac/</loc>
+    <loc>https://mjyi.github.io/Hugo-theme-Orange/post/1704-dev-in-mac/</loc>
     <lastmod>2017-04-05T14:17:51+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/1702-ocserv/</loc>
+    <loc>https://mjyi.github.io/Hugo-theme-Orange/post/1702-ocserv/</loc>
     <lastmod>2017-02-15T17:15:43+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/1609-start/</loc>
+    <loc>https://mjyi.github.io/Hugo-theme-Orange/post/1609-start/</loc>
     <lastmod>2016-09-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/cocoapods/</loc>
+    <loc>https://mjyi.github.io/Hugo-theme-Orange/tags/cocoapods/</loc>
     <lastmod>2017-04-05T14:17:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/topics/development/</loc>
+    <loc>https://mjyi.github.io/Hugo-theme-Orange/tags/development/</loc>
+    <lastmod>2017-04-05T14:17:51+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mjyi.github.io/Hugo-theme-Orange/topics/development/</loc>
     <lastmod>2017-02-15T17:15:43+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/development/</loc>
+    <loc>https://mjyi.github.io/Hugo-theme-Orange/tags/ios/</loc>
     <lastmod>2017-04-05T14:17:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/ios/</loc>
-    <lastmod>2017-04-05T14:17:51+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/music/</loc>
+    <loc>https://mjyi.github.io/Hugo-theme-Orange/tags/music/</loc>
     <lastmod>2016-09-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/</loc>
+    <loc>https://mjyi.github.io/Hugo-theme-Orange/</loc>
     <lastmod>2017-04-05T14:17:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/ocserv/</loc>
+    <loc>https://mjyi.github.io/Hugo-theme-Orange/tags/ocserv/</loc>
     <lastmod>2017-02-15T17:15:43+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/post/</loc>
+    <loc>https://mjyi.github.io/Hugo-theme-Orange/post/</loc>
     <lastmod>2017-04-05T14:17:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/sublime/</loc>
+    <loc>https://mjyi.github.io/Hugo-theme-Orange/tags/sublime/</loc>
     <lastmod>2017-04-05T14:17:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/</loc>
+    <loc>https://mjyi.github.io/Hugo-theme-Orange/tags/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/topics/</loc>
+    <loc>https://mjyi.github.io/Hugo-theme-Orange/topics/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/topics/vpn/</loc>
+    <loc>https://mjyi.github.io/Hugo-theme-Orange/tags/vpn/</loc>
     <lastmod>2017-02-15T17:15:43+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/vpn/</loc>
+    <loc>https://mjyi.github.io/Hugo-theme-Orange/topics/vpn/</loc>
     <lastmod>2017-02-15T17:15:43+00:00</lastmod>
     <priority>0</priority>
   </url>
