@@ -1,4 +1,4 @@
-baseurl = "https://mjyi.github.io/"
+baseurl = "/"
 title = "My Hugo Site"
 languageCode = "en-us"
 disqusShortname = "your disqus shortname"
