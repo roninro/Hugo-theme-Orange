@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on My Hugo Site</title>
+    <link>https://mjyi.github.io/Hugo-theme-Orange/tags/</link>
+    <description>Recent content in Tags on My Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright (c) 2015 - 2017, blanK; all rights reserved.</copyright>
+    <lastBuildDate>Wed, 05 Apr 2017 14:17:51 +0800</lastBuildDate>
+    
+	<atom:link href="https://mjyi.github.io/Hugo-theme-Orange/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cocoapods</title>
+      <link>https://mjyi.github.io/Hugo-theme-Orange/tags/cocoapods/</link>
+      <pubDate>Wed, 05 Apr 2017 14:17:51 +0800</pubDate>
+      
+      <guid>https://mjyi.github.io/Hugo-theme-Orange/tags/cocoapods/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Development</title>
+      <link>https://mjyi.github.io/Hugo-theme-Orange/tags/development/</link>
+      <pubDate>Wed, 05 Apr 2017 14:17:51 +0800</pubDate>
+      
+      <guid>https://mjyi.github.io/Hugo-theme-Orange/tags/development/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ios</title>
+      <link>https://mjyi.github.io/Hugo-theme-Orange/tags/ios/</link>
+      <pubDate>Wed, 05 Apr 2017 14:17:51 +0800</pubDate>
+      
+      <guid>https://mjyi.github.io/Hugo-theme-Orange/tags/ios/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Music</title>
+      <link>https://mjyi.github.io/Hugo-theme-Orange/tags/music/</link>
+      <pubDate>Sun, 11 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjyi.github.io/Hugo-theme-Orange/tags/music/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ocserv</title>
+      <link>https://mjyi.github.io/Hugo-theme-Orange/tags/ocserv/</link>
+      <pubDate>Wed, 15 Feb 2017 17:15:43 +0000</pubDate>
+      
+      <guid>https://mjyi.github.io/Hugo-theme-Orange/tags/ocserv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sublime</title>
+      <link>https://mjyi.github.io/Hugo-theme-Orange/tags/sublime/</link>
+      <pubDate>Wed, 05 Apr 2017 14:17:51 +0800</pubDate>
+      
+      <guid>https://mjyi.github.io/Hugo-theme-Orange/tags/sublime/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vpn</title>
+      <link>https://mjyi.github.io/Hugo-theme-Orange/tags/vpn/</link>
+      <pubDate>Wed, 15 Feb 2017 17:15:43 +0000</pubDate>
+      
+      <guid>https://mjyi.github.io/Hugo-theme-Orange/tags/vpn/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

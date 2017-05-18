@@ -23,14 +23,14 @@
   </url>
   
   <url>
-    <loc>https://mjyi.github.io/Hugo-theme-Orange/topics/development/</loc>
-    <lastmod>2017-02-15T17:15:43+00:00</lastmod>
+    <loc>https://mjyi.github.io/Hugo-theme-Orange/tags/development/</loc>
+    <lastmod>2017-04-05T14:17:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://mjyi.github.io/Hugo-theme-Orange/tags/development/</loc>
-    <lastmod>2017-04-05T14:17:51+08:00</lastmod>
+    <loc>https://mjyi.github.io/Hugo-theme-Orange/topics/development/</loc>
+    <lastmod>2017-02-15T17:15:43+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -72,22 +72,24 @@
   
   <url>
     <loc>https://mjyi.github.io/Hugo-theme-Orange/tags/</loc>
+    <lastmod>2017-04-05T14:17:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://mjyi.github.io/Hugo-theme-Orange/topics/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjyi.github.io/Hugo-theme-Orange/topics/vpn/</loc>
     <lastmod>2017-02-15T17:15:43+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://mjyi.github.io/Hugo-theme-Orange/tags/vpn/</loc>
+    <lastmod>2017-02-15T17:15:43+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mjyi.github.io/Hugo-theme-Orange/topics/vpn/</loc>
     <lastmod>2017-02-15T17:15:43+00:00</lastmod>
     <priority>0</priority>
   </url>
