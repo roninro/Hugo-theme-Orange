@@ -1,7 +1,5 @@
 # Hugo theme orange
 
-**[Demo](https://mjyi.github.io/Hugo-theme-Orange/)**
-
 **Screenshot**
 
 ![img-1](screenshots/screenshot.png)
